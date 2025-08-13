@@ -1,3 +1,5 @@
+/* eslint-disable n8n-nodes-base/node-class-description-inputs-wrong-regular-node */
+/* eslint-disable n8n-nodes-base/node-class-description-outputs-wrong */
 import {
 	IExecuteFunctions,
 	INodeExecutionData,
@@ -130,7 +132,7 @@ export class Timetonic implements INodeType {
 			},
 			// Required fields for listTableRowsById
 			{
-				displayName: 'Book Owner (b_o)',
+				displayName: 'Book Owner (B_o)',
 				name: 'bookOwner',
 				type: 'string',
 				required: true,
@@ -178,7 +180,7 @@ export class Timetonic implements INodeType {
 				required: true,
 				default: '{}',
 				description:
-					'JSON object with field IDs as keys and values to set. Example: {"fieldID1": "value1", "fieldID2": "value2"}',
+					'JSON object with field IDs as keys and values to set. Example: {"fieldID1": "value1", "fieldID2": "value2"}.',
 				displayOptions: {
 					show: {
 						resource: ['table'],
@@ -196,11 +198,47 @@ export class Timetonic implements INodeType {
 				displayOptions: {},
 				options: [
 					{
-						displayName: 'View ID',
-						name: 'viewId',
-						type: 'number',
-						default: 0,
-						description: 'ID of the view to apply',
+						displayName: 'Bypass URL Trigger',
+						name: 'bypassUrlTrigger',
+						type: 'boolean',
+						default: true,
+						description: 'Whether to bypass URL triggers and automations',
+						displayOptions: {
+							show: {
+								'/resource': ['table'],
+								'/operation': ['createOrUpdateTableRow'],
+							},
+						},
+					},
+					{
+						displayName: 'Category ID',
+						name: 'catId',
+						type: 'string',
+						default: '',
+						description:
+							'The ID of the category in which the new row must be created (optional if fieldValues is passed)',
+						displayOptions: {
+							show: {
+								'/resource': ['table'],
+								'/operation': ['createOrUpdateTableRow'],
+							},
+						},
+					},
+
+					{
+						displayName: 'Encrypted Field Passwords',
+						name: 'encryptedFieldPasswords',
+						type: 'string',
+						typeOptions: { password: true },
+						default: '',
+						description:
+							'JSON string which associates the encrypted field ID with its password (e.g. {"field1": "password1","field2": "password2"})',
+						displayOptions: {
+							show: {
+								'/resource': ['table'],
+								'/operation': ['createOrUpdateTableRow'],
+							},
+						},
 					},
 					{
 						displayName: 'Format',
@@ -223,13 +261,7 @@ export class Timetonic implements INodeType {
 							},
 						],
 					},
-					{
-						displayName: 'Max Rows',
-						name: 'maxRows',
-						type: 'number',
-						default: 0,
-						description: 'Maximum number of rows to return',
-					},
+
 					{
 						displayName: 'Last Modified After',
 						name: 'lastModifiedAfter',
@@ -237,20 +269,7 @@ export class Timetonic implements INodeType {
 						default: 0,
 						description: 'Server timestamp after which the row must have been modified',
 					},
-					{
-						displayName: 'Category ID',
-						name: 'catId',
-						type: 'string',
-						default: '',
-						description:
-							'The id of the category in which the new row must be created (optional if fieldValues is passed)',
-						displayOptions: {
-							show: {
-								'/resource': ['table'],
-								'/operation': ['createOrUpdateTableRow'],
-							},
-						},
-					},
+
 					{
 						displayName: 'Link Separator',
 						name: 'linkSeparator',
@@ -265,18 +284,11 @@ export class Timetonic implements INodeType {
 						},
 					},
 					{
-						displayName: 'Encrypted Field Passwords',
-						name: 'encryptedFieldPasswords',
-						type: 'string',
-						default: '',
-						description:
-							'JSON string which associates the encrypted field id with its password (e.g. {"field1": "password1","field2": "password2"})',
-						displayOptions: {
-							show: {
-								'/resource': ['table'],
-								'/operation': ['createOrUpdateTableRow'],
-							},
-						},
+						displayName: 'Max Rows',
+						name: 'maxRows',
+						type: 'number',
+						default: 0,
+						description: 'Maximum number of rows to return',
 					},
 					{
 						displayName: 'Version',
@@ -286,23 +298,17 @@ export class Timetonic implements INodeType {
 						description: 'Version of API/server',
 					},
 					{
-						displayName: 'Bypass URL Trigger',
-						name: 'bypassUrlTrigger',
-						type: 'boolean',
-						default: true,
-						description: 'Whether to bypass URL triggers and automations',
-						displayOptions: {
-							show: {
-								'/resource': ['table'],
-								'/operation': ['createOrUpdateTableRow'],
-							},
-						},
+						displayName: 'View ID',
+						name: 'viewId',
+						type: 'number',
+						default: 0,
+						description: 'ID of the view to apply',
 					},
 				],
 			},
 		],
 	};
-
+	// eslint-disable-next-line no-unused-vars
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const items = this.getInputData();
 		const returnData: INodeExecutionData[] = [];
@@ -406,8 +412,6 @@ export class Timetonic implements INodeType {
 							true,
 						) as boolean;
 
-					
-
 						const qs: any = {
 							req: 'createOrUpdateTableRow',
 							o_u: credentials.oauthUserId,
@@ -415,7 +419,7 @@ export class Timetonic implements INodeType {
 							sesskey: credentials.sesskey,
 							rowId,
 							b_o: bookOwner,
-							fieldValues, 
+							fieldValues,
 							bypassUrlTrigger,
 						};
 

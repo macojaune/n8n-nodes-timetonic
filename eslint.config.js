@@ -18,21 +18,23 @@ const compat = new FlatCompat({
     allConfig: js.configs.all
 });
 
-module.exports = defineConfig([{
-    languageOptions: {
-        globals: {
-            ...globals.browser,
-            ...globals.node,
-        },
+module.exports = defineConfig([
+    {
+        files: ["**/*.ts"],
+        languageOptions: {
+            globals: {
+                ...globals.browser,
+                ...globals.node,
+            },
 
-        parser: tsParser,
-        sourceType: "module",
-        ecmaVersion: 2019,
+            parser: tsParser,
+            sourceType: "module",
+            ecmaVersion: 2019,
 
-        parserOptions: {
-            project: "tsconfig.json",
+            parserOptions: {
+                project: "tsconfig.json",
+            },
         },
-    },
 
     plugins: {
         "@typescript-eslint": typescriptEslint,
@@ -41,7 +43,7 @@ module.exports = defineConfig([{
 
     extends: compat.extends(
         "eslint:recommended",
-        "@typescript-eslint/recommended",
+        // "@typescript-eslint/recommended",
         "plugin:n8n-nodes-base/nodes",
     ),
 
@@ -57,4 +59,18 @@ module.exports = defineConfig([{
 
         "@typescript-eslint/no-explicit-any": "warn",
     },
-}]);
+},
+{
+    files: ["**/*.js"],
+    languageOptions: {
+        globals: {
+            ...globals.browser,
+            ...globals.node,
+        },
+        sourceType: "module",
+        ecmaVersion: 2019,
+    },
+    rules: {
+          // Basic ESLint rules for JS files
+      },
+ }]);

@@ -1,30 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="60" height="60">
-  <defs>
-    <linearGradient id="timetonicGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#357ABD;stop-opacity:1" />
-    </linearGradient>
-  </defs>
-  
-  <!-- Background circle -->
-  <circle cx="30" cy="30" r="28" fill="url(#timetonicGradient)" stroke="#2C5F8A" stroke-width="2"/>
-  
-  <!-- Clock face -->
-  <circle cx="30" cy="30" r="20" fill="white" stroke="#357ABD" stroke-width="2"/>
-  
-  <!-- Clock hands -->
-  <line x1="30" y1="30" x2="30" y2="18" stroke="#357ABD" stroke-width="3" stroke-linecap="round"/>
-  <line x1="30" y1="30" x2="38" y2="30" stroke="#357ABD" stroke-width="2" stroke-linecap="round"/>
-  
-  <!-- Center dot -->
-  <circle cx="30" cy="30" r="2" fill="#357ABD"/>
-  
-  <!-- Hour markers -->
-  <circle cx="30" cy="12" r="1.5" fill="#357ABD"/>
-  <circle cx="48" cy="30" r="1.5" fill="#357ABD"/>
-  <circle cx="30" cy="48" r="1.5" fill="#357ABD"/>
-  <circle cx="12" cy="30" r="1.5" fill="#357ABD"/>
-  
-  <!-- Letter T for TimeTonic -->
-  <text x="30" y="52" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="white">T</text>
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
+ preserveAspectRatio="xMidYMid meet">
+
+<g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+fill="#000000" stroke="none">
+<path d="M1360 3539 c-82 -48 -139 -164 -147 -300 -10 -154 38 -260 182 -405
+152 -153 324 -268 635 -422 107 -53 209 -102 225 -109 17 -6 59 -24 95 -38 75
+-32 152 -56 158 -50 3 3 -59 125 -151 295 -277 512 -531 860 -721 988 -94 63
+-209 80 -276 41z"/>
+<path d="M2960 3335 l0 -205 -85 0 c-51 0 -99 -6 -119 -14 -108 -45 -117 -203
+-14 -266 27 -16 51 -20 125 -20 l91 0 4 -452 4 -453 28 -84 c67 -193 234 -284
+491 -268 100 7 200 34 289 79 66 33 116 68 116 79 0 6 -135 236 -145 247 -1 1
+-27 -9 -58 -23 -31 -14 -83 -31 -115 -37 -52 -10 -64 -9 -97 8 -21 10 -48 32
+-59 47 -20 27 -21 42 -24 443 l-3 414 211 0 210 0 0 150 0 150 -210 0 -210 0
+0 205 0 205 -215 0 -215 0 0 -205z"/>
+<path d="M1370 2181 c-102 -33 -160 -108 -160 -206 0 -193 188 -282 545 -255
+77 5 177 17 223 25 45 8 117 21 160 29 42 8 131 29 197 46 66 18 130 35 143
+37 12 3 24 8 26 12 2 3 -35 24 -82 45 -48 21 -98 44 -112 51 -98 51 -397 154
+-565 196 -96 23 -327 36 -375 20z"/>
+</g>
 </svg>
