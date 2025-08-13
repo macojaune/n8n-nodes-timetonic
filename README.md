@@ -24,14 +24,17 @@ After installing the node, you can use it like any other node. n8n displays the 
 npm install n8n-nodes-timetonic
 ```
 
-## Credentials
+## Required Credentials
 
-To use this node, you need to configure TimeTonic API credentials:
+To use this node, you need to configure the following TimeTonic API credentials:
 
-1. **OAuth Key**: Your TimeTonic OAuth key
-2. **OAuth User ID**: Your OAuth user ID (o_u parameter)
-3. **User ID**: Your user ID (u_c parameter, usually same as OAuth User ID)
-4. **Base URL**: The TimeTonic API base URL (default: https://timetonic.com/live/api.php)
+- **OAuth Key**: Your TimeTonic OAuth key
+- **OAuth User ID**: The OAuth user ID (o_u parameter)
+- **User ID**: The user ID (u_c parameter, usually same as OAuth User ID)
+- **Session Key**: A valid session key for API authentication
+- **Base URL**: TimeTonic API base URL (default: https://timetonic.com/live/api.php)
+
+**Note**: You need to obtain a session key separately using the TimeTonic API's `createSesskey` operation before using this node.
 
 ### Getting Your Credentials
 
@@ -45,13 +48,39 @@ To obtain your TimeTonic API credentials:
 ## Supported Operations
 
 ### Authentication
-- **Create Session Key**: Generate a session key for API requests
-- **Drop All Sessions**: Drop all open sessions except the current one
+- **Drop All Sessions**: Drop all active sessions except the current one
 
 ### User
-- **Get User Info**: Retrieve user information (placeholder - requires specific API endpoint)
+- **Get User Info**: Retrieve information about the authenticated user
+
+### Table
+- **List Table Rows by ID**: Retrieve specific table rows by their IDs <mcreference link="https://timetonic.com/dev/api.php?doc" index="2">2</mcreference>
+- **Create or Update Table Row**: Create a new row or update an existing row in a table <mcreference link="https://support.timetonic.com/hc/en-001/articles/4402560183570-Create-or-modify-a-row-or-values-with-the-API-createOrUpdateTableRow-s" index="1">1</mcreference>
 
 ## Example Usage
+
+### Authentication
+1. **Drop All Sessions**: Clean up active sessions
+
+### User Operations
+1. **Get User Info**: Retrieve authenticated user information
+
+### Table Operations
+1. **List Table Rows by ID**: 
+   - **Book Owner**: Book owner identifier (required)
+   - **Category ID**: Category (table) ID (required)
+   - **Optional parameters**: View ID, format (columns/rows/diff_ready_rows), max rows, last modified after timestamp, API version
+   - Returns data from the specified table
+
+2. **Create or Update Table Row**:
+   - **Create new row**: Set Row ID to "tmpNEW_ROW"
+   - **Update existing row**: Provide the actual row ID
+   - **Field Values**: JSON object with field IDs and values <mcreference link="https://support.timetonic.com/hc/en-001/articles/4402560183570-Create-or-modify-a-row-or-values-with-the-API-createOrUpdateTableRow-s" index="1">1</mcreference>
+   - Example: `{"fieldID1": "value1", "fieldID2": "value2"}`
+   - **Category ID**: The id of the category in which the new row must be created (optional if fieldValues is passed)
+   - **Link Separator**: The text separator used to separate link values (default: ",")
+   - **Encrypted Field Passwords**: JSON string which associates the encrypted field id with its password (e.g. {"field1": "password1","field2": "password2"})
+   - **Bypass URL Trigger**: Control whether to trigger automations (default: true)
 
 ### Basic Authentication Flow
 
@@ -64,6 +93,8 @@ To obtain your TimeTonic API credentials:
 ### Session Management
 
 The node automatically handles session creation for operations that require authentication. The session key is used internally for API requests that need it.
+
+All operations require proper TimeTonic API credentials configured in the node.
 
 ## Development
 

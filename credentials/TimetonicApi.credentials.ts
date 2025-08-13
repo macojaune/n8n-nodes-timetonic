@@ -10,15 +10,7 @@ export class TimetonicApi implements ICredentialType {
 	displayName = 'TimeTonic API';
 	documentationUrl = 'https://timetonic.com/live/apidoc/';
 	properties: INodeProperties[] = [
-		{
-			displayName: 'OAuth Key',
-			name: 'oauthkey',
-			type: 'string',
-			typeOptions: { password: true },
-			default: '',
-			description: 'The OAuth key for your TimeTonic account',
-			required: true,
-		},
+	
 		{
 			displayName: 'OAuth User ID',
 			name: 'oauthUserId',
@@ -36,6 +28,15 @@ export class TimetonicApi implements ICredentialType {
 			required: true,
 		},
 		{
+			displayName: 'Session Key',
+			name: 'sesskey',
+			type: 'string',
+			typeOptions: { password: true },
+			default: '',
+			description: 'The session key for API authentication',
+			required: true,
+		},
+		{
 			displayName: 'Base URL',
 			name: 'baseUrl',
 			type: 'string',
@@ -49,9 +50,9 @@ export class TimetonicApi implements ICredentialType {
 		type: 'generic',
 		properties: {
 			qs: {
-				oauthkey: '={{$credentials.oauthkey}}',
 				o_u: '={{$credentials.oauthUserId}}',
 				u_c: '={{$credentials.userId}}',
+				sesskey: '={{$credentials.sesskey}}',
 			},
 		},
 	};
@@ -62,10 +63,10 @@ export class TimetonicApi implements ICredentialType {
 			url: '',
 			method: 'POST',
 			qs: {
-				req: 'createSesskey',
-				oauthkey: '={{$credentials.oauthkey}}',
+				req: 'getUserInfo',
 				o_u: '={{$credentials.oauthUserId}}',
 				u_c: '={{$credentials.userId}}',
+				sesskey: '={{$credentials.sesskey}}',
 			},
 		},
 		rules: [

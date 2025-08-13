@@ -104,11 +104,14 @@ The TimeTonic API uses a two-step authentication process:
 The node currently implements:
 
 - **Authentication Resource**:
-  - `createSesskey`: Creates a session key
   - `dropAllSessions`: Drops all sessions except current
 
 - **User Resource**:
   - `getUserInfo`: Placeholder for user information retrieval
+
+- **Table Resource**:
+  - `listTableRowsById`: List rows from a table by ID
+  - `createOrUpdateTableRow`: Create or update a table row
 
 ### Adding New Operations
 
@@ -127,22 +130,61 @@ To add new operations:
    ]
    ```
 
-2. **Implement the operation logic** in the `execute` method:
+2. **Add input fields** (if needed):
    ```typescript
-   if (operation === 'newOperation') {
-     // Implementation here
+   {
+     displayName: 'Parameter Name',
+     name: 'parameterName',
+     type: 'string',
+     required: true,
+     displayOptions: {
+       show: {
+         resource: ['resourceName'],
+         operation: ['newOperation'],
+       },
+     },
    }
    ```
 
-3. **Test the new operation** thoroughly
+3. **Implement the operation logic** in the `execute` method:
+   ```typescript
+   if (operation === 'newOperation') {
+     // Make API request using session key from credentials
+     const qs = {
+       req: 'newOperation',
+       o_u: credentials.oauthUserId,
+       u_c: credentials.userId,
+       sesskey: credentials.sesskey,
+       // ... other parameters
+     };
+     
+     responseData = await this.helpers.httpRequest.call(this, {
+       method: 'POST',
+       url: credentials.baseUrl as string,
+       qs,
+     });
+   }
+   ```
+
+4. **Test the new operation** thoroughly
 
 ## API Endpoints Reference
 
 Based on the TimeTonic API documentation:
 
 ### Authentication
-- `req=createSesskey`: Create session key
 - `req=dropAllSessions`: Drop all sessions
+
+### User
+- `getUserInfo`: Get user information
+
+### Table
+- `listTableRowsById`: List table rows with filtering options
+  - Required Parameters: `b_o` (book owner), `catId` (category/table ID), `o_u`, `u_c`, `sesskey`
+  - Optional Parameters: `viewId`, `format`, `maxRows`, `lastModifiedAfter`, `version`
+- `createOrUpdateTableRow`: Create or update a table row
+  - Required Parameters: `o_u`, `u_c`, `sesskey`, `tableID`, `rowID`, `allRowValues`
+  - Optional Parameters: `catId`, `linkSeparator`, `encryptedFieldPasswords`, `bypassUrlTrigger`
 
 ### Common Parameters
 - `version`: API version (optional)
