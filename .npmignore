@@ -1,0 +1,49 @@
+# Source files
+nodes/
+credentials/
+*.ts
+tsconfig.json
+gulpfile.js
+
+# Development files
+.eslintrc.js
+.eslintrc.prepublish.js
+.prettierrc.js
+.editorconfig
+
+# Documentation
+README_TEMPLATE.md
+
+# IDE files
+.vscode/
+.idea/
+
+# Git files
+.git/
+.gitignore
+
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# Environment
+.env*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+test/
+*.test.js
+*.test.ts
+
+# Coverage
+coverage/
+.nyc_output/

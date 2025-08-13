@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="60" height="60">
+  <defs>
+    <linearGradient id="timetonicGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#357ABD;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="30" cy="30" r="28" fill="url(#timetonicGradient)" stroke="#2C5F8A" stroke-width="2"/>
+  
+  <!-- Clock face -->
+  <circle cx="30" cy="30" r="20" fill="white" stroke="#357ABD" stroke-width="2"/>
+  
+  <!-- Clock hands -->
+  <line x1="30" y1="30" x2="30" y2="18" stroke="#357ABD" stroke-width="3" stroke-linecap="round"/>
+  <line x1="30" y1="30" x2="38" y2="30" stroke="#357ABD" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Center dot -->
+  <circle cx="30" cy="30" r="2" fill="#357ABD"/>
+  
+  <!-- Hour markers -->
+  <circle cx="30" cy="12" r="1.5" fill="#357ABD"/>
+  <circle cx="48" cy="30" r="1.5" fill="#357ABD"/>
+  <circle cx="30" cy="48" r="1.5" fill="#357ABD"/>
+  <circle cx="12" cy="30" r="1.5" fill="#357ABD"/>
+  
+  <!-- Letter T for TimeTonic -->
+  <text x="30" y="52" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="white">T</text>
+</svg>
