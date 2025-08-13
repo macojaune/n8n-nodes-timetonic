@@ -12,12 +12,12 @@
     "license": "MIT",
     "homepage": "https://github.com/marvinl/n8n-nodes-timetonic",
     "author": {
-        "name": "Marvin L",
-        "email": "marvin@example.com"
+        "name": "MarvinL.com",
+        "email": "contact@marvinl.com"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/marvinl/n8n-nodes-timetonic.git"
+        "url": "https://github.com/macojaune/n8n-nodes-timetonic.git"
     },
     "engines": {
         "node": ">=20.15"
